@@ -76,10 +76,6 @@ function Game.new()
 	-- Draw initial hand of 3 cards
 	self.gameState.cardManager:dealCards(self.gameState.deck, self.gameState.hand, 3)
 
-	-- Add a test archer tower at cell (6, 6)
-	local testTower = ArcherTower.new(6, 6)
-	table.insert(self.gameState.towers, testTower)
-
 	return self
 end
 
@@ -174,6 +170,11 @@ end
 function Game:updatePostWaveState(dt)
 	-- Minimal updates during reward state
 	-- Most interaction happens through keypresses
+
+	-- Check if rewards are not set, transition to pre-wave
+	if not self.gameState.rewards then
+		self:transitionToState(GameStates.PRE_WAVE)
+	end
 end
 
 function Game:draw()
@@ -202,10 +203,7 @@ function Game:draw()
 
 	-- Draw game status in the top-left corner
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.print("Wave: " .. self.gameState.player.wave, 10, 10)
 	love.graphics.print("Health: " .. self.gameState.player.health, 10, 30)
-	love.graphics.print("Enemies: " .. #self.gameState.enemies, 10, 50)
-	love.graphics.print("State: " .. self.gameState.currentState, 10, 70)
 
 	-- State-specific drawing
 	if self.gameState.currentState == GameStates.PRE_WAVE then

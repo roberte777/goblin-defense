@@ -10,7 +10,7 @@ function ArcherTower.new(cellX, cellY)
 	local cost = 100
 	local range = 200
 	local damage = 20
-	local attackSpeed = 1.0 -- attacks per second
+	local attackSpeed = 10.0 -- attacks per second
 
 	-- Call parent constructor with pixel coordinates
 	local self = Tower.new(cellX, cellY, cost, range, damage, attackSpeed)

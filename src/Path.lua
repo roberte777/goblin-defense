@@ -228,9 +228,18 @@ function Path:markPathOnMap()
 end
 
 -- Update the path when the map changes
--- @param x The x coordinate that changed
--- @param y The y coordinate that changed
-function Path:updatePath()
+-- @param x The x coordinate that changed (optional)
+-- @param y The y coordinate that changed (optional)
+function Path:updatePath(x, y)
+	-- Validate parameters before updating (x and y are now optional)
+	if x and y then
+		if x < 1 or x > self.map.width or y < 1 or y > self.map.height then
+			print("Warning: Attempted to update path with invalid coordinates: " .. x .. ", " .. y)
+			return
+		end
+	end
+
+	-- Recalculate the path
 	self:findPath()
 end
 
