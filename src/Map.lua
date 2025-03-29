@@ -120,7 +120,15 @@ function Map:draw(showGrid)
 
 	-- Draw grid lines if requested
 	if showGrid then
+		-- Save the current line width
+		local prevLineWidth = love.graphics.getLineWidth()
+
+		-- Set a consistent line width for grid lines
+		love.graphics.setLineWidth(1)
+
+		-- Set grid color
 		love.graphics.setColor(0.5, 0.5, 0.5, 0.5)
+
 		-- Vertical lines
 		for x = 0, self.width do
 			local pixelX = x * self.cellSize
@@ -131,6 +139,9 @@ function Map:draw(showGrid)
 			local pixelY = y * self.cellSize
 			love.graphics.line(0, pixelY, self.width * self.cellSize, pixelY)
 		end
+
+		-- Restore previous line width
+		love.graphics.setLineWidth(prevLineWidth)
 	end
 end
 
