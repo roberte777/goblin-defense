@@ -5,6 +5,7 @@ CardManager.__index = CardManager
 
 local Card = require("src.card.Card")
 local TowerCard = require("src.card.TowerCard")
+local WallCard = require("src.card.WallCard")
 local Deck = require("src.card.Deck")
 local Hand = require("src.card.Hand")
 
@@ -26,12 +27,13 @@ end
 function CardManager:initializeCards()
 	-- Add tower cards
 	table.insert(self.cards, TowerCard.new())
-
+	table.insert(self.cards, TowerCard.new())
+	table.insert(self.cards, TowerCard.new())
 	table.insert(self.cards, TowerCard.new())
 
-	table.insert(self.cards, TowerCard.new())
-
-	table.insert(self.cards, TowerCard.new())
+	-- Add wall cards
+	table.insert(self.cards, WallCard.new())
+	table.insert(self.cards, WallCard.new())
 
 	-- Add more cards as needed
 end
@@ -44,8 +46,9 @@ function CardManager:createStarterDeck()
 		TowerCard.new(),
 		TowerCard.new(),
 		TowerCard.new(),
-		TowerCard.new(),
-		TowerCard.new(),
+		-- Add 2 basic walls
+		WallCard.new(),
+		WallCard.new(),
 	}
 
 	return Deck.new(starterCards)
